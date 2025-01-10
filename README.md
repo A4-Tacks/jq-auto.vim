@@ -20,3 +20,6 @@ Plug 'A4-Tacks/jq-auto.vim'
 ```
 JQOpen --indent 4
 ```
+
+> [!WARNING]
+> Be careful of infinite loops during the input process
