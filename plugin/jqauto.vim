@@ -9,6 +9,7 @@ endfunction
 function! jqauto#open(args) abort
     let t:jqauto_args = a:args
     let t:jqauto_current_bufid = bufnr()
+    let t:jqauto_line = line('.')
 
     let bufid = get(t:, 'jqauto_bufid')
     let winid = bufwinnr(bufid)
@@ -38,7 +39,7 @@ endfunction
 function! jqauto#update() abort
     setlocal nomodified
     let bufid = t:jqauto_current_bufid
-    let curline = getcurpos(bufwinnr(bufid))[1]
+    let curline = t:jqauto_line
     let inputs = getbufline(bufid, 1, curline)
     let script = join(getbufline(t:jqauto_bufid, 1, '$'), "\n")
 
