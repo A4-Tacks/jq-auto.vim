@@ -29,11 +29,14 @@ function! jqauto#open(args) abort
 
     aug jqauto
         au TextChanged,TextChangedI,InsertLeave <buffer> call jqauto#update()
+        au WinEnter * call jqauto#check_autoclose()
     aug end
 
     call jqauto#update()
 
-    star!
+    if winid == -1
+        star!
+    endif
 endfunction
 
 function! jqauto#update() abort
@@ -53,4 +56,10 @@ function! jqauto#update() abort
     for line in split(outputs, '\n')
         call appendbufline(bufid, '$', line)
     endfor
+endfunction
+
+function! jqauto#check_autoclose()
+    if winnr('$') == 1 && bufname() ==# 'jqauto.jq'
+        q
+    endif
 endfunction
