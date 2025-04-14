@@ -21,7 +21,7 @@ function! jqauto#open(args) abort
     let t:jqauto_bufid = bufnr()
     silent file jqauto.jq
     setf jq
-    setlocal nobuflisted noswapfile nowrite
+    setlocal nobuflisted noswapfile buftype=nowrite
 
     if !bufid
         call setbufline(t:jqauto_bufid, 1, '.')
